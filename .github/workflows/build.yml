@@ -15,8 +15,9 @@ jobs:
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git ./ANGLE/depot_tools
       - name: Build
         run: |
+          cd ANGLE
           export PATH="$(pwd)/depot_tools:$PATH"
-          python ./ANGLE/scripts/bootstrap.py
+          python scripts/bootstrap.py
           gclient sync
-          gn gen ./ANGLE/out/Release --args="is_debug=false target_os=\"ios\" ios_enable_code_signing=false ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
-          autoninja -C ./ANGLE/out/Release
+          gn gen out/Release --args="is_debug=false target_os=\"ios\" ios_enable_code_signing=false ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
+          autoninja -C out/Release
