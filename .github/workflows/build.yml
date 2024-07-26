@@ -9,14 +9,14 @@ jobs:
     steps:
       - name: Checkout ANGLE sources
         run: |
-          git clone https://github.com/google/angle .
+          git clone https://github.com/google/angle ./ANGLE
       - name: Fetch depot_tools
         run: |
-          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git ./ANGLE
       - name: Build
         run: |
           export PATH="$(pwd)/depot_tools:$PATH"
-          python scripts/bootstrap.py
+          python ./ANGLE/scripts/bootstrap.py
           gclient sync
-          gn gen out/Release --args="is_debug=false target_os=\"ios\" ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
-          autoninja -C out/Release
+          gn gen ./ANGLE/out/Release --args="is_debug=false target_os=\"ios\" ios_enable_code_signing=false ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
+          autoninja -C ./ANGLE/out/Release
