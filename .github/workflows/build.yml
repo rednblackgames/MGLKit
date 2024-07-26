@@ -1,0 +1,22 @@
+name: Build Frameworks
+
+on: 
+  workflow_dispatch
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout ANGLE sources
+        run: |
+          git clone https://github.com/google/angle .
+      - name: Fetch depot_tools
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+      - name: Build
+        run: |
+          export PATH="$(pwd)/depot_tools:$PATH"
+          python scripts/bootstrap.py
+          gclient sync
+          gn gen out/Release --args="is_debug=false target_os=\"ios\" ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
+          autoninja -C out/Release
