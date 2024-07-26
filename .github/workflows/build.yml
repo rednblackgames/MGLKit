@@ -26,3 +26,26 @@ jobs:
           gclient sync
           gn gen out/Release --args="is_debug=false target_os=\"ios\" ios_enable_code_signing=false ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
           autoninja -C out/Release
+      - name: Prepare Theos Building Environment
+        run: | 
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
+          mv Makefile.ios Makefile
+      - name: Build MGLKit framework
+        run: |
+          mkdir Frameworks
+          cp -R ./ANGLE/out/Release/libEGL.framework ./Frameworks
+          cp -R ./ANGLE/out/Release/libGLESv2.framework ./Frameworks
+          make
+      - name: ZIP Frameworks
+        run: |
+          zip --symlinks -r ${GITHUB_WORKSPACE}/libEGL.framework.ios.zip Frameworks/libEGL.framework
+          zip --symlinks -r ${GITHUB_WORKSPACE}/libGLESv2.framework.ios.zip Frameworks/libGLESv2.framework
+          zip --symlinks -r ${GITHUB_WORKSPACE}/MGLKit.framework.ios.zip .theos/obj/MGLKit.framework
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2.1.4
+        with:
+          path: |
+            libEGL.framework.ios.zip
+            libGLESv2.framework.ios.zip
+            MGLKit.framework.ios.zip
+          name: ios
