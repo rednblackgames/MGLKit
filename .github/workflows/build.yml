@@ -22,8 +22,9 @@ jobs:
           gclient sync
           gn gen out/Release --args="is_debug=false target_os=\"ios\" ios_enable_code_signing=false angle_enable_metal=true angle_enable_wgpu=false ios_deployment_target=\"14.0\" angle_build_all=false target_environment=\"device\""
           autoninja -C out/Release
-      - name: Build MGLKit framework
+      - name: Prepare Theos
       - uses: Randomblock1/theos-action@v1.4
+      - name: Build MGLKit framework
         run: |
           mv Makefile.ios Makefile
           mkdir Frameworks
