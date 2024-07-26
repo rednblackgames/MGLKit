@@ -12,7 +12,7 @@ jobs:
           git clone https://github.com/google/angle ./ANGLE
       - name: Fetch depot_tools
         run: |
-          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git ./ANGLE
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git ./ANGLE/depot_tools
       - name: Build
         run: |
           export PATH="$(pwd)/depot_tools:$PATH"
