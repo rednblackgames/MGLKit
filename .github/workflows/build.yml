@@ -35,7 +35,7 @@ jobs:
         run: |
           cd Frameworks
           zip --symlinks -r ${GITHUB_WORKSPACE}/libEGL.framework.ios.zip libEGL.framework
-          zip --symlinks -r ${GITHUB_WORKSPACE}/libGLESv2.framework.ios.zip Frameworks/libGLESv2.framework
+          zip --symlinks -r ${GITHUB_WORKSPACE}/libGLESv2.framework.ios.zip libGLESv2.framework
           cd ../.theos/obj/
           zip --symlinks -r ${GITHUB_WORKSPACE}/MGLKit.framework.ios.zip MGLKit.framework
       - name: Upload artifacts
@@ -78,7 +78,7 @@ jobs:
         run: |
           cd Frameworks
           zip --symlinks -r ${GITHUB_WORKSPACE}/libEGL.framework.ios.simulator.zip libEGL.framework
-          zip --symlinks -r ${GITHUB_WORKSPACE}/libGLESv2.framework.ios.simulator.zip Frameworks/libGLESv2.framework
+          zip --symlinks -r ${GITHUB_WORKSPACE}/libGLESv2.framework.ios.simulator.zip libGLESv2.framework
           cd ../.theos/obj/
           zip --symlinks -r ${GITHUB_WORKSPACE}/MGLKit.framework.ios.simulator.zip MGLKit.framework
       - name: Upload artifacts
