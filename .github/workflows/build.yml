@@ -7,12 +7,17 @@ jobs:
   build-ios:
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Checkout ANGLE sources
         run: |
           git clone https://github.com/google/angle ./ANGLE
       - name: Fetch depot_tools
         run: |
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git ./ANGLE/depot_tools
+      - name: Apply iOS Build Fix patch
+        run: |
+          cd ANGLE
+          git apply ../angle_ios_build_fix.patch
       - name: Build
         run: |
           cd ANGLE
