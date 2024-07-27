@@ -79,7 +79,7 @@ jobs:
           cd Frameworks
           zip --symlinks -r ${GITHUB_WORKSPACE}/libEGL.framework.ios.simulator.zip libEGL.framework
           zip --symlinks -r ${GITHUB_WORKSPACE}/libGLESv2.framework.ios.simulator.zip libGLESv2.framework
-          cd ../.theos/obj/
+          cd ../.theos/obj/iphone_simulator
           zip --symlinks -r ${GITHUB_WORKSPACE}/MGLKit.framework.ios.simulator.zip MGLKit.framework
       - name: Upload artifacts
         uses: actions/upload-artifact@v2.1.4

@@ -3,7 +3,7 @@ TARGET := simulator:clang:latest:14.0
 FOR_RELEASE := true
 
 include $(THEOS)/makefiles/common.mk
-# TARGET_CODESIGN = fastPathSign
+TARGET_CODESIGN = echo
 
 FRAMEWORK_NAME = MGLKit
 
